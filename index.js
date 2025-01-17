@@ -53,8 +53,16 @@ function displayUserOnScreen(userDetails) {
     userList.appendChild(userItem);
 
     deleteBtn.addEventListener("click", function (event) {
-        userList.removeChild(event.target.parentElement);
-        localStorage.removeItem(userDetails.email);
+
+        const userItem = event.target.parentElement; // Get the parent list item
+        const userId = userDetails._id; // Assuming the API response includes an ID field named "_id"
+    
+        axios.delete(`https://crudcrud.com/api/26c6ebe19efb4466afcb43ff0377b417/appointmentData/${userId}`)
+          .then((response) => {
+            console.log(response);
+            userList.removeChild(userItem);
+          })
+          .catch((error) => console.log(error));
     });
 
     editBtn.addEventListener("click", function (event) {
