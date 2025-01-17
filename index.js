@@ -19,6 +19,20 @@ function handleFormSubmit(event) {
     document.getElementById("phone").value = "";
 }
 
+window.addEventListener("DOMContentLoaded",()=>{
+    axios
+    .get("https://crudcrud.com/api/26c6ebe19efb4466afcb43ff0377b417/appointmentData")
+    .then((responce)=>{
+        console.log(responce)
+        for(var i=0; i<responce.data.length; i++){
+            displayUserOnScreen(responce.data[i])
+        }
+    })
+    .catch((rez)=>{console.log(rez)})
+    
+})
+
+
 function displayUserOnScreen(userDetails) {
     const userItem = document.createElement("li");
     userItem.appendChild(
@@ -52,5 +66,4 @@ function displayUserOnScreen(userDetails) {
     });
 }
 
-// Do not touch code below
-module.exports = handleFormSubmit;
+
